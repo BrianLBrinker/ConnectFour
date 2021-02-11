@@ -6,7 +6,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./connect-four.component.scss"]
 })
 export class ConnectFourComponent implements OnInit {
-  private dimensions = { width: 7, height: 6 };
+  public dimensions = { width: 7, height: 6 };
+
   constructor() {}
 
   ngOnInit(): void {}
