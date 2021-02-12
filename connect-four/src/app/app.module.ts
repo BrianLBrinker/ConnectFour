@@ -6,13 +6,15 @@ import { AppComponent } from "./app.component";
 import { ConnectFourComponent } from "./components/connect-four/connect-four.component";
 import { BoardComponent } from "./components/connect-four/board/board.component";
 import { CellComponent } from "./components/connect-four/board/cell/cell.component";
+import { ControlComponent } from "./components/connect-four/control/control.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     ConnectFourComponent,
     BoardComponent,
-    CellComponent
+    CellComponent,
+    ControlComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

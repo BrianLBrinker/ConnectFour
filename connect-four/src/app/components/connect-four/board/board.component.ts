@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { BoardDimensions } from "src/app/models/board";
 
 @Component({
   selector: "app-board",
@@ -7,9 +6,16 @@ import { BoardDimensions } from "src/app/models/board";
   styleUrls: ["./board.component.scss"]
 })
 export class BoardComponent implements OnInit {
-  @Input() dimensions: BoardDimensions;
+  @Input() boardWidth: any;
+  @Input() boardHeight: any;
+
+  public bWidth: any[];
+  public bHeight: any[];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.bWidth = new Array(this.boardWidth);
+    this.bHeight = new Array(this.boardHeight);
+  }
 }

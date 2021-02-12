@@ -1,1 +1,9 @@
-<p>board works!</p>
+<section>
+  <ul>
+    <li *ngFor="let column of bWidth; index as c">
+      <ul>
+        <li *ngFor="let row of bHeight; index as r"><app-cell></app-cell></li>
+      </ul>
+    </li>
+  </ul>
+</section>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { BoardDimensions } from "src/app/models/board";
 
 @Component({
   selector: "app-connect-four",
@@ -7,11 +6,14 @@ import { BoardDimensions } from "src/app/models/board";
   styleUrls: ["./connect-four.component.scss"]
 })
 export class ConnectFourComponent implements OnInit {
-  public dimensions: BoardDimensions = { width: 7, height: 6 };
+  public boardWidth: number = 7;
+  public boardHeight: number = 6;
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  private createBoard() {}
+  registerClick(index: number) {
+    console.info(index);
+  }
 }

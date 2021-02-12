@@ -1,0 +1,14 @@
+div {
+  font-family: Tahoma, Arial, sans-serif;
+
+  & section {
+    display: flex;
+    justify-content: center;
+
+    &.control {
+    }
+    &.board {
+      left: calc(50% - 245px);
+    }
+  }
+}
