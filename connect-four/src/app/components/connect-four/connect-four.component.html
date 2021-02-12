@@ -1,5 +1,8 @@
-<div class="connect-four">
-  <h1>Connect Four</h1>
+<div class="connect">
+  <h1>
+    <span>Connect {{ connectionLength }}</span>
+    <span>Turn: {{ currentPlayer }}</span>
+  </h1>
   <section class="control">
     <app-control
       [boardWidth]="boardWidth"
@@ -11,7 +14,7 @@
     <app-board
       [boardWidth]="boardWidth"
       [boardHeight]="boardHeight"
-      [player]="currentPlayer"
+      [tokenGrid]="tokenGrid"
     ></app-board>
   </section>
 </div>

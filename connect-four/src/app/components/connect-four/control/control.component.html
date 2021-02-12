@@ -1,6 +1,6 @@
 <section>
   <ul>
-    <li *ngFor="let column of bWidth; index as c">
+    <li *ngFor="let column of columns; index as c">
       <button
         [ngClass]="player === player1 ? 'player1' : 'player2'"
         (click)="buttonClicked(c)"

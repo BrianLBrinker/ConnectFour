@@ -1,5 +1,13 @@
-div {
+div.connect {
   font-family: Tahoma, Arial, sans-serif;
+
+  & h1 {
+    display: flex;
+    justify-content: space-between;
+
+    & span {
+    }
+  }
 
   & section {
     display: flex;

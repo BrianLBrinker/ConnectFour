@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { PlayerNumber } from "src/app/models/player";
+import { TokenVals } from "src/app/models/player";
 
 @Component({
   selector: "app-control",
@@ -8,17 +8,17 @@ import { PlayerNumber } from "src/app/models/player";
 })
 export class ControlComponent implements OnInit {
   @Input() boardWidth: number;
-  @Input() player: PlayerNumber;
+  @Input() player: TokenVals;
 
   @Output() buttonClickedEvent = new EventEmitter<number>();
 
-  public bWidth: any[];
-  public player1 = PlayerNumber.player1;
+  public columns: any[];
+  public player1 = TokenVals.player1;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.bWidth = new Array(this.boardWidth);
+    this.columns = new Array(this.boardWidth);
   }
 
   public buttonClicked(buttonIndex: number) {
