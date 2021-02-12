@@ -1,6 +1,7 @@
 <div class="connect">
   <h1>
     <span>Connect {{ connectionLength }}</span>
+    <span *ngIf="gameOver">{{ currentPlayer }} wins!</span>
     <span>Turn: {{ currentPlayer }}</span>
   </h1>
   <section class="control">
