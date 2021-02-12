@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { PlayerNumber } from "src/app/models/player";
+import { TokenVals } from "src/app/models/player";
 
 @Component({
   selector: "app-connect-four",
@@ -7,10 +7,11 @@ import { PlayerNumber } from "src/app/models/player";
   styleUrls: ["./connect-four.component.scss"]
 })
 export class ConnectFourComponent implements OnInit {
-  public boardWidth: number = 7;
-  public boardHeight: number = 6;
-  public tokenGrid: number[][];
-  public currentPlayer: PlayerNumber;
+  public boardWidth = 7;
+  public boardHeight = 6;
+  public connectionLength = 4;
+  public tokenGrid: TokenVals[][];
+  public currentPlayer: TokenVals;
 
   constructor() {}
 
@@ -21,38 +22,50 @@ export class ConnectFourComponent implements OnInit {
 
   private initTokenGrid(width: number, height: number): void {
     this.tokenGrid = new Array(height)
-      .fill(PlayerNumber.unclaimed)
-      .map(() => new Array(width).fill(PlayerNumber.unclaimed));
+      .fill(TokenVals.unclaimed)
+      .map(() => new Array(width).fill(TokenVals.unclaimed));
   }
 
-  private initPlayers() {
-    this.currentPlayer = PlayerNumber.player1;
-    console.info(this.currentPlayer);
+  private initPlayers(): void {
+    this.currentPlayer = TokenVals.player1;
   }
 
-  private togglePlayers() {
-    if (this.currentPlayer === PlayerNumber.player1) {
-      this.currentPlayer = PlayerNumber.player2;
+  private togglePlayers(): void {
+    if (this.currentPlayer === TokenVals.player1) {
+      this.currentPlayer = TokenVals.player2;
     } else {
-      this.currentPlayer = PlayerNumber.player1;
+      this.currentPlayer = TokenVals.player1;
     }
   }
 
-  private depositTokenAt(index: number, player: PlayerNumber) {
-    const height = this.boardHeight;
+  private testHorizontalConnectionsFrom(rowIndex: number, colIndex: number) {}
+
+  private testConnections(): void {
+    const topRow = this.connectionLength;
+    const rightCol = this.boardWidth - this.connectionLength;
+    const bottomRow = this.boardHeight - this.connectionLength;
+    const leftCol = this.connectionLength;
 
     for (let rowIndex = this.boardHeight - 1; rowIndex >= 0; rowIndex -= 1) {
-      if (this.tokenGrid[rowIndex][index] === PlayerNumber.unclaimed) {
+      for (let colIndex = 0; colIndex < this.boardWidth; colIndex += 1) {
+        // console.info(rowIndex, ", ", colIndex);
+      }
+    }
+  }
+
+  private depositTokenAt(index: number, player: TokenVals): void {
+    for (let rowIndex = this.boardHeight - 1; rowIndex >= 0; rowIndex -= 1) {
+      if (this.tokenGrid[rowIndex][index] === TokenVals.unclaimed) {
         this.tokenGrid[rowIndex][index] = this.currentPlayer;
         break;
       }
     }
 
-    console.info(this.tokenGrid);
+    this.testConnections();
     this.togglePlayers();
   }
 
-  registerClick(index: number) {
+  public registerClick(index: number): void {
     this.depositTokenAt(index, this.currentPlayer);
   }
 }

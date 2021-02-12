@@ -1,16 +1,17 @@
 <section>
   <ul>
-    <li *ngFor="let column of bWidth; index as c">
+    <li *ngFor="let column of columns; index as c">
       <ul>
-        <li class="board" *ngFor="let row of bHeight; index as r">
+        <li class="board" *ngFor="let row of rows; index as r">
           <div class="cell"></div>
         </li>
-        <li class="token" *ngFor="let row of bHeight; index as r">
-          <div
-            class="token player2 win"
-            [ngStyle]="{ 'bottom.px': cellMargin + cellSize * r }"
-          ></div>
-        </li>
+        <li
+          *ngFor="let row of rows; index as r"
+          [ngClass]="getClassFrom(tokenGrid[r][c])"
+          [ngStyle]="{
+            'bottom.px': cellMargin + cellSize * (rows.length - 1 - r)
+          }"
+        ></li>
       </ul>
     </li>
   </ul>
