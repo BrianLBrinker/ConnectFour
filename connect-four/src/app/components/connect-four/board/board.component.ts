@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { PlayerNumber } from "src/app/models/player";
 
 @Component({
   selector: "app-board",
@@ -6,11 +7,15 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./board.component.scss"]
 })
 export class BoardComponent implements OnInit {
-  @Input() boardWidth: any;
-  @Input() boardHeight: any;
+  @Input() boardWidth: number;
+  @Input() boardHeight: number;
+  @Input() player: PlayerNumber;
 
-  public bWidth: any[];
-  public bHeight: any[];
+  public bWidth: number[];
+  public bHeight: number[];
+  public cellSize = 70;
+  public cellMargin = 10;
+  public tokenSize = 50;
 
   constructor() {}
 

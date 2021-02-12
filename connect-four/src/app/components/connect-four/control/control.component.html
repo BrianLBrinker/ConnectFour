@@ -1,7 +1,10 @@
 <section>
   <ul>
     <li *ngFor="let column of bWidth; index as c">
-      <button class="player1" (click)="buttonClicked(c)"></button>
+      <button
+        [ngClass]="player === player1 ? 'player1' : 'player2'"
+        (click)="buttonClicked(c)"
+      ></button>
     </li>
   </ul>
 </section>

@@ -3,6 +3,7 @@
   <section class="control">
     <app-control
       [boardWidth]="boardWidth"
+      [player]="currentPlayer"
       (buttonClickedEvent)="registerClick($event)"
     ></app-control>
   </section>
@@ -10,6 +11,7 @@
     <app-board
       [boardWidth]="boardWidth"
       [boardHeight]="boardHeight"
+      [player]="currentPlayer"
     ></app-board>
   </section>
 </div>
