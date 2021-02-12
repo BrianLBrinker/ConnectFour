@@ -1,1 +1,15 @@
-<app-board></app-board>
+<div class="connect-four">
+  <h1>Connect Four</h1>
+  <section class="control">
+    <app-control
+      [boardWidth]="boardWidth"
+      (buttonClickedEvent)="registerClick($event)"
+    ></app-control>
+  </section>
+  <section class="board">
+    <app-board
+      [boardWidth]="boardWidth"
+      [boardHeight]="boardHeight"
+    ></app-board>
+  </section>
+</div>
