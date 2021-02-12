@@ -2,7 +2,15 @@
   <ul>
     <li *ngFor="let column of bWidth; index as c">
       <ul>
-        <li *ngFor="let row of bHeight; index as r"><app-cell></app-cell></li>
+        <li class="board" *ngFor="let row of bHeight; index as r">
+          <div class="cell"></div>
+        </li>
+        <li class="token" *ngFor="let row of bHeight; index as r">
+          <div
+            class="token player2 win"
+            [ngStyle]="{ 'bottom.px': cellMargin + cellSize * r }"
+          ></div>
+        </li>
       </ul>
     </li>
   </ul>
