@@ -4,4 +4,6 @@ A game for two players, in which the first player to line-up four elements in a 
 
 https://en.wikipedia.org/wiki/Connect_Four
 
-To run, type `ng serve --open` in a terminal.
+To run with Angular, type `ng serve --open` in a terminal.
+
+To run on a machine without Angular installed, unzip `connect-four.zip` and within the same directory, run `python -m SimpleHTTPServer 8001` or another HTTP server. Then, open http://localhost:8001 in a web browser.
