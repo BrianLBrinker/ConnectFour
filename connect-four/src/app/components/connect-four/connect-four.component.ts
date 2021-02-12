@@ -12,6 +12,7 @@ export class ConnectFourComponent implements OnInit {
   public connectionLength = 4;
   public tokenGrid: TokenVals[][];
   public currentPlayer: TokenVals;
+  public gameOver = false;
 
   constructor() {}
 
@@ -38,19 +39,98 @@ export class ConnectFourComponent implements OnInit {
     }
   }
 
-  private testHorizontalConnectionsFrom(rowIndex: number, colIndex: number) {}
+  private testHorizontalsFrom(
+    rowIndex: number,
+    colIndex: number,
+    grid: TokenVals[][],
+    player: TokenVals
+  ): boolean {
+    let nodes = [];
 
-  private testConnections(): void {
-    const topRow = this.connectionLength;
-    const rightCol = this.boardWidth - this.connectionLength;
-    const bottomRow = this.boardHeight - this.connectionLength;
-    const leftCol = this.connectionLength;
+    for (let i = 0; i < this.connectionLength; i += 1) {
+      nodes.push(grid[rowIndex][colIndex + i]);
+    }
+
+    return nodes.every(node => node === player);
+  }
+
+  private testVerticalsFrom(
+    rowIndex: number,
+    colIndex: number,
+    grid: TokenVals[][],
+    player: TokenVals
+  ): boolean {
+    let nodes = [];
+
+    for (let i = 0; i < this.connectionLength; i += 1) {
+      nodes.push(grid[rowIndex - i][colIndex]);
+    }
+
+    return nodes.every(node => node === player);
+  }
+
+  private testBkwdDiagsFrom(
+    rowIndex: number,
+    colIndex: number,
+    grid: TokenVals[][],
+    player: TokenVals
+  ): boolean {
+    let nodes = [];
+
+    for (let i = 0; i < this.connectionLength; i += 1) {
+      nodes.push(grid[rowIndex - i][colIndex - i]);
+    }
+
+    return nodes.every(node => node === player);
+  }
+
+  private testFrwdDiagsFrom(
+    rowIndex: number,
+    colIndex: number,
+    grid: TokenVals[][],
+    player: TokenVals
+  ): boolean {
+    let nodes = [];
+
+    for (let i = 0; i < this.connectionLength; i += 1) {
+      nodes.push(grid[rowIndex - i][colIndex + i]);
+    }
+
+    return nodes.every(node => node === player);
+  }
+
+  private playerWins(player: TokenVals, grid: TokenVals[][]): boolean {
+    const topRow = this.boardHeight - this.connectionLength + 1;
+    const rightCol = this.boardWidth - this.connectionLength + 1;
+    const leftCol = this.connectionLength - 1;
 
     for (let rowIndex = this.boardHeight - 1; rowIndex >= 0; rowIndex -= 1) {
       for (let colIndex = 0; colIndex < this.boardWidth; colIndex += 1) {
-        // console.info(rowIndex, ", ", colIndex);
+        if (colIndex < rightCol) {
+          if (this.testHorizontalsFrom(rowIndex, colIndex, grid, player)) {
+            return true;
+          }
+        }
+
+        if (rowIndex > topRow) {
+          if (this.testVerticalsFrom(rowIndex, colIndex, grid, player)) {
+            return true;
+          }
+        }
+        if (rowIndex > topRow && colIndex < rightCol) {
+          if (this.testFrwdDiagsFrom(rowIndex, colIndex, grid, player)) {
+            return true;
+          }
+        }
+        if (rowIndex > topRow && colIndex > leftCol) {
+          if (this.testBkwdDiagsFrom(rowIndex, colIndex, grid, player)) {
+            return true;
+          }
+        }
       }
     }
+
+    return false;
   }
 
   private depositTokenAt(index: number, player: TokenVals): void {
@@ -61,11 +141,16 @@ export class ConnectFourComponent implements OnInit {
       }
     }
 
-    this.testConnections();
-    this.togglePlayers();
+    if (!this.playerWins(this.currentPlayer, this.tokenGrid)) {
+      this.togglePlayers();
+    } else {
+      this.gameOver = true;
+    }
   }
 
   public registerClick(index: number): void {
-    this.depositTokenAt(index, this.currentPlayer);
+    if (!this.gameOver) {
+      this.depositTokenAt(index, this.currentPlayer);
+    }
   }
 }
