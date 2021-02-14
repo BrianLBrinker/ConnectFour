@@ -7,3 +7,5 @@ https://en.wikipedia.org/wiki/Connect_Four
 To run with Angular, type `ng serve --open` in a terminal.
 
 To run on a machine without Angular installed, unzip `connect-four.zip` and within the same directory, run `python -m SimpleHTTPServer 8001` or another HTTP server. Then, open http://localhost:8001 in a web browser.
+
+To run build based on new features and optimizations (code yet to be committed), follow the instructions above but with `connect-n.zip`.
