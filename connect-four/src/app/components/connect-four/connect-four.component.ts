@@ -100,7 +100,7 @@ export class ConnectFourComponent implements OnInit {
   }
 
   private playerWins(player: TokenVals, grid: TokenVals[][]): boolean {
-    const topRow = this.boardHeight - this.connectionLength + 1;
+    const topRow = this.boardHeight - this.connectionLength;
     const rightCol = this.boardWidth - this.connectionLength + 1;
     const leftCol = this.connectionLength - 1;
 
@@ -111,7 +111,6 @@ export class ConnectFourComponent implements OnInit {
             return true;
           }
         }
-
         if (rowIndex > topRow) {
           if (this.testVerticalsFrom(rowIndex, colIndex, grid, player)) {
             return true;
@@ -122,7 +121,7 @@ export class ConnectFourComponent implements OnInit {
             return true;
           }
         }
-        if (rowIndex > topRow && colIndex > leftCol) {
+        if (rowIndex > topRow && colIndex >= leftCol) {
           if (this.testBkwdDiagsFrom(rowIndex, colIndex, grid, player)) {
             return true;
           }
