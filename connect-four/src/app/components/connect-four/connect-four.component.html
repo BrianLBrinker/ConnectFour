@@ -2,6 +2,12 @@
   <h1>
     <span>Connect {{ connectionLength }}</span>
     <span *ngIf="gameOver">{{ currentPlayer }} wins!</span>
+    <span
+      *ngIf="gameOver"
+      (click)="resetGame()"
+      [ngStyle]="{ cursor: 'pointer' }"
+      >Reset</span
+    >
     <span>Turn: {{ currentPlayer }}</span>
   </h1>
   <section class="control">

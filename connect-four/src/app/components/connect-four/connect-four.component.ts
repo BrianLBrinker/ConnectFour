@@ -21,6 +21,12 @@ export class ConnectFourComponent implements OnInit {
     this.initPlayers();
   }
 
+  public resetGame(): void {
+    this.initTokenGrid(this.boardWidth, this.boardHeight);
+    this.initPlayers();
+    this.gameOver = false;
+  }
+
   private initTokenGrid(width: number, height: number): void {
     this.tokenGrid = new Array(height)
       .fill(TokenVals.unclaimed)
@@ -100,7 +106,7 @@ export class ConnectFourComponent implements OnInit {
   }
 
   private playerWins(player: TokenVals, grid: TokenVals[][]): boolean {
-    const topRow = this.boardHeight - this.connectionLength;
+    const topRow = this.connectionLength - 1;
     const rightCol = this.boardWidth - this.connectionLength + 1;
     const leftCol = this.connectionLength - 1;
 
@@ -111,17 +117,17 @@ export class ConnectFourComponent implements OnInit {
             return true;
           }
         }
-        if (rowIndex > topRow) {
+        if (rowIndex >= topRow) {
           if (this.testVerticalsFrom(rowIndex, colIndex, grid, player)) {
             return true;
           }
         }
-        if (rowIndex > topRow && colIndex < rightCol) {
+        if (rowIndex >= topRow && colIndex < rightCol) {
           if (this.testFrwdDiagsFrom(rowIndex, colIndex, grid, player)) {
             return true;
           }
         }
-        if (rowIndex > topRow && colIndex >= leftCol) {
+        if (rowIndex >= topRow && colIndex >= leftCol) {
           if (this.testBkwdDiagsFrom(rowIndex, colIndex, grid, player)) {
             return true;
           }
