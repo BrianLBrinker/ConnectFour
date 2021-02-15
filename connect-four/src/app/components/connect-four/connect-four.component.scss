@@ -4,8 +4,15 @@ div.connect {
   & h1 {
     display: flex;
     justify-content: space-between;
+    padding: 0 10%;
 
     & span {
+      margin: 0 10px;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 50%);
+
+      &.reset:hover {
+        text-decoration: underline;
+      }
     }
   }
 
