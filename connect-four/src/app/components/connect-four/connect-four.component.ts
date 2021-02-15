@@ -12,19 +12,28 @@ export class ConnectFourComponent implements OnInit {
   public connectionLength = 4;
   public tokenGrid: TokenVals[][];
   public currentPlayer: TokenVals;
+  public winner: TokenVals;
+  public noWinner = TokenVals.unclaimed;
   public gameOver = false;
+  public turnCount = 0;
+
+  private maxTurns: number;
+  private minTurns: number;
 
   constructor() {}
 
   ngOnInit(): void {
     this.initTokenGrid(this.boardWidth, this.boardHeight);
     this.initPlayers();
+    this.maxTurns = this.boardWidth * this.boardHeight;
+    this.minTurns = 2 * this.connectionLength - 1;
   }
 
   public resetGame(): void {
     this.initTokenGrid(this.boardWidth, this.boardHeight);
     this.initPlayers();
     this.gameOver = false;
+    this.turnCount = 0;
   }
 
   private initTokenGrid(width: number, height: number): void {
@@ -35,6 +44,7 @@ export class ConnectFourComponent implements OnInit {
 
   private initPlayers(): void {
     this.currentPlayer = TokenVals.player1;
+    this.winner = TokenVals.unclaimed;
   }
 
   private togglePlayers(): void {
@@ -109,27 +119,32 @@ export class ConnectFourComponent implements OnInit {
     const topRow = this.connectionLength - 1;
     const rightCol = this.boardWidth - this.connectionLength + 1;
     const leftCol = this.connectionLength - 1;
+    const gameWinnable = this.turnCount >= this.minTurns ? true : false;
 
-    for (let rowIndex = this.boardHeight - 1; rowIndex >= 0; rowIndex -= 1) {
-      for (let colIndex = 0; colIndex < this.boardWidth; colIndex += 1) {
-        if (colIndex < rightCol) {
-          if (this.testHorizontalsFrom(rowIndex, colIndex, grid, player)) {
-            return true;
-          }
-        }
-        if (rowIndex >= topRow) {
-          if (this.testVerticalsFrom(rowIndex, colIndex, grid, player)) {
-            return true;
-          }
-        }
-        if (rowIndex >= topRow && colIndex < rightCol) {
-          if (this.testFrwdDiagsFrom(rowIndex, colIndex, grid, player)) {
-            return true;
-          }
-        }
-        if (rowIndex >= topRow && colIndex >= leftCol) {
-          if (this.testBkwdDiagsFrom(rowIndex, colIndex, grid, player)) {
-            return true;
+    if (gameWinnable) {
+      for (let rowIndex = this.boardHeight - 1; rowIndex >= 0; rowIndex -= 1) {
+        for (let colIndex = 0; colIndex < this.boardWidth; colIndex += 1) {
+          if (this.tokenGrid[rowIndex][colIndex] === this.currentPlayer) {
+            if (colIndex < rightCol) {
+              if (this.testHorizontalsFrom(rowIndex, colIndex, grid, player)) {
+                return true;
+              }
+            }
+            if (rowIndex >= topRow) {
+              if (this.testVerticalsFrom(rowIndex, colIndex, grid, player)) {
+                return true;
+              }
+            }
+            if (rowIndex >= topRow && colIndex < rightCol) {
+              if (this.testFrwdDiagsFrom(rowIndex, colIndex, grid, player)) {
+                return true;
+              }
+            }
+            if (rowIndex >= topRow && colIndex >= leftCol) {
+              if (this.testBkwdDiagsFrom(rowIndex, colIndex, grid, player)) {
+                return true;
+              }
+            }
           }
         }
       }
@@ -147,14 +162,20 @@ export class ConnectFourComponent implements OnInit {
     }
 
     if (!this.playerWins(this.currentPlayer, this.tokenGrid)) {
-      this.togglePlayers();
+      if (this.turnCount < this.maxTurns) {
+        this.togglePlayers();
+      } else {
+        this.gameOver = true;
+      }
     } else {
       this.gameOver = true;
+      this.winner = this.currentPlayer;
     }
   }
 
   public registerClick(index: number): void {
-    if (!this.gameOver) {
+    if (!this.gameOver && this.turnCount < this.maxTurns) {
+      this.turnCount += 1;
       this.depositTokenAt(index, this.currentPlayer);
     }
   }

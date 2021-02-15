@@ -1,9 +1,10 @@
 <section>
-  <ul>
+  <ul *ngIf="!gameOver">
     <li *ngFor="let column of columns; index as c">
       <button
+        *ngIf="hasRoomInColumn(c)"
         [ngClass]="player === player1 ? 'player1' : 'player2'"
-        (click)="buttonClicked(c)"
+        (click)="buttonClicked($event, c)"
       ></button>
     </li>
   </ul>
