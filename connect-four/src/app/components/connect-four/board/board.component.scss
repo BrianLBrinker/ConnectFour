@@ -1,4 +1,14 @@
+$board-color: #003b6f;
+$board-highlight: #104c80;
+$board-lowlight: #002c53;
+
 section {
+  border-top: 6px solid $board-highlight;
+  border-right: 6px solid $board-lowlight;
+  border-bottom: 6px solid $board-lowlight;
+  border-left: 6px solid $board-highlight;
+  border-radius: 3px;
+  
   & ul {
     list-style-type: none;
     list-style-position: inside;
@@ -32,7 +42,7 @@ section {
               border-radius: 50%;
               width: 50px;
               height: 50px;
-              box-shadow: 0px 0px 0px 25px #003b6f;
+              box-shadow: 0px 0px 0px 25px $board-color;
             }
           }
         }
@@ -42,6 +52,7 @@ section {
           left: 10px;
           width: 50px;
           height: 50px;
+          box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2) inset;
 
           &.player1 {
             background-color: #ff0;

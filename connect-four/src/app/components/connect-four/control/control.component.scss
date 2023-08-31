@@ -26,6 +26,7 @@ section {
         transition-timing-function: ease-in;
         outline: 0 none;
         opacity: 0.8;
+        box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2) inset;
 
         &:hover {
           cursor: pointer;
