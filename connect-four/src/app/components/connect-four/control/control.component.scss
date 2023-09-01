@@ -1,3 +1,22 @@
+
+@mixin keyframes($animation-name) {
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  animation: #{$str};
+}
+
+@include keyframes(y-shake) {
+    0% { transform: translateY(0) }
+    25% { transform: translateY(5px) }
+    50% { transform: translateY(-5px) }
+    75% { transform: translateY(5px) }
+    100% { transform: translateY(0) }
+}
+
 section {
   height: 70px;
 
@@ -25,12 +44,13 @@ section {
         transition-duration: 0.5s;
         transition-timing-function: ease-in;
         outline: 0 none;
-        opacity: 0.8;
+        opacity: 0.9;
         box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2) inset;
 
         &:hover {
           cursor: pointer;
           opacity: 1;
+          @include animation('y-shake 0.8s infinite');
         }
 
         &.player1 {

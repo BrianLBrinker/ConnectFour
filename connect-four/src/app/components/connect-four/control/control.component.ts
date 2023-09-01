@@ -14,18 +14,23 @@ import { TokenVals } from "src/app/models/player";
   styleUrls: ["./control.component.scss"]
 })
 export class ControlComponent implements OnInit {
-  @Input() boardWidth: number;
-  @Input() boardHeight: number;
-  @Input() tokenGrid: TokenVals[][];
-  @Input() player: TokenVals;
-  @Input() gameOver: boolean;
+  @Input()
+  boardWidth!: number;
+  @Input()
+  boardHeight!: number;
+  @Input()
+  tokenGrid!: TokenVals[][];
+  @Input()
+  player!: TokenVals;
+  @Input()
+  gameOver!: boolean;
 
   @Output() buttonClickedEvent = new EventEmitter<number>();
 
-  public columns: any[];
+  public columns!: any[];
   public player1 = TokenVals.player1;
 
-  private fallTime: number;
+  private fallTime!: number;
 
   constructor(private renderer: Renderer2) {}
 

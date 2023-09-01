@@ -1,9 +1,14 @@
 div.connect {
-  font-family: Tahoma, Arial, sans-serif;
+  font-family: 'Merienda';
 
   & h1 {
+    color: #fff;
+    text-shadow:  0 4px 2px rgba(1,39,105, 0.9);
+  }
+
+  & h1, h2 {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 10%;
 
     & span {
@@ -20,8 +25,6 @@ div.connect {
     display: flex;
     justify-content: center;
 
-    &.control {
-    }
     &.board {
       left: calc(50% - 245px);
     }

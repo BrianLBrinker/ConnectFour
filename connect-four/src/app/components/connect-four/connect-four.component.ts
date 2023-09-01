@@ -10,15 +10,15 @@ export class ConnectFourComponent implements OnInit {
   public boardWidth = 7;
   public boardHeight = 6;
   public connectionLength = 4;
-  public tokenGrid: TokenVals[][];
-  public currentPlayer: TokenVals;
-  public winner: TokenVals;
+  public tokenGrid: TokenVals[][] = [];
+  public currentPlayer: TokenVals = TokenVals.player1;
+  public winner: TokenVals | undefined;
   public noWinner = TokenVals.unclaimed;
   public gameOver = false;
   public turnCount = 0;
 
-  private maxTurns: number;
-  private minTurns: number;
+  private maxTurns!: number;
+  private minTurns!: number;
 
   constructor() {}
 

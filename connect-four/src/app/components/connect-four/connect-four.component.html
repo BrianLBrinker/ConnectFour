@@ -1,18 +1,8 @@
+
+<link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
 <div class="connect">
   <h1>
-    <span>Connect {{ connectionLength }}</span>
-    <span *ngIf="gameOver && winner !== noWinner"
-      >{{ currentPlayer }} wins in {{ turnCount }} turns!</span
-    >
-    <span *ngIf="gameOver && winner === noWinner">No one wins.</span>
-    <span
-      class="reset"
-      *ngIf="gameOver"
-      (click)="resetGame()"
-      [ngStyle]="{ cursor: 'pointer' }"
-      >Reset</span
-    >
-    <span *ngIf="!gameOver">Turn: {{ currentPlayer }}</span>
+    Connect {{ connectionLength }}
   </h1>
   <section class="control">
     <app-control
@@ -31,4 +21,18 @@
       [tokenGrid]="tokenGrid"
     ></app-board>
   </section>
+  <h2>
+    <span *ngIf="gameOver && winner !== noWinner"
+      >{{ currentPlayer }} wins in {{ turnCount }} turns!</span
+    >
+    <span *ngIf="gameOver && winner === noWinner">No one wins.</span>
+    <span
+      class="reset"
+      *ngIf="gameOver"
+      (click)="resetGame()"
+      [ngStyle]="{ cursor: 'pointer' }"
+      >Reset</span
+    >
+    <span *ngIf="!gameOver">Turn: {{ currentPlayer }}</span>
+  </h2>
 </div>
